@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="gabrageRecycler" targetNamespace="http://www.example.org/gabrageRecycler/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/gabrageRecycler/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/gabrageRecycler/">
+      <xsd:element name="registerUser">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="tns:User"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="registerUserResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="tns:User"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="addRecyclingUser">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="userName" type="xsd:string"/>
+      			<xsd:element name="userRecycling" type="tns:UserRecycling"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="addRecyclingUserResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="tns:UserRecycling"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecyclingByUser">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="userName" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecyclingByUserResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="userRecyclings" type="tns:UserRecycling"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAllRecyclingsByUser">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="userName" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAllRecyclingsByUserResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="tns:Recycling"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="User">
+      	<xsd:sequence>
+      		<xsd:element name="firstName" type="xsd:string"/>
+      		<xsd:element name="lastName" type="xsd:string"/>
+      		<xsd:element name="id" type="xsd:int"/>
+      		<xsd:element name="userName" type="xsd:string"/>
+      		<xsd:element name="address" type="xsd:string"/>
+      		<xsd:element name="mail" type="xsd:string"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="UserRecycling">
+      	<xsd:sequence>
+      		<xsd:element name="id" type="xsd:int"/>
+      		<xsd:element name="user" type="tns:User"/>
+      		<xsd:element name="bottles" type="xsd:int"/>
+      		<xsd:element name="paperboard" type="xsd:int"/>
+      		<xsd:element name="glass" type="xsd:int"/>
+      		<xsd:element name="tetrabriks" type="xsd:int"/>
+      		<xsd:element name="cans" type="xsd:int"/>
+      		<xsd:element name="date" type="xsd:date"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+      
+            <xsd:complexType name="Recycling">
+            	<xsd:sequence>
+            		<xsd:element name="bottles" type="xsd:int"/>
+            		<xsd:element name="glass" type="xsd:int"/>
+            		<xsd:element name="tetrabriks" type="xsd:int"/>
+            		<xsd:element name="paperboard" type="xsd:int"/>
+            		<xsd:element name="cans" type="xsd:int"/>
+                    <xsd:element name="tons" type="xsd:float"/>
+                </xsd:sequence>
+            </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getRecyclingByUserResponse">
+    <wsdl:part name="parameters" element="tns:getRecyclingByUserResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllRecyclingsByUserRequest">
+    <wsdl:part name="parameters" element="tns:getAllRecyclingsByUser">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addRecyclingUserRequest">
+    <wsdl:part name="parameters" element="tns:addRecyclingUser">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registerUserResponse">
+    <wsdl:part name="parameters" element="tns:registerUserResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllRecyclingsByUserResponse">
+    <wsdl:part name="parameters" element="tns:getAllRecyclingsByUserResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registerUserRequest">
+    <wsdl:part name="parameters" element="tns:registerUser">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addRecyclingUserResponse">
+    <wsdl:part name="parameters" element="tns:addRecyclingUserResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRecyclingByUserRequest">
+    <wsdl:part name="parameters" element="tns:getRecyclingByUser">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="gabrageRecycler">
+    <wsdl:operation name="registerUser">
+      <wsdl:input message="tns:registerUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:registerUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRecyclingUser">
+      <wsdl:input message="tns:addRecyclingUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addRecyclingUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRecyclingByUser">
+      <wsdl:input message="tns:getRecyclingByUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getRecyclingByUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllRecyclingsByUser">
+      <wsdl:input message="tns:getAllRecyclingsByUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllRecyclingsByUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="gabrageRecyclerSOAP" type="tns:gabrageRecycler">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="registerUser">
+      <soap:operation soapAction="http://www.example.org/gabrageRecycler/registerUser"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRecyclingUser">
+      <soap:operation soapAction="http://www.example.org/gabrageRecycler/addRecyclingUser"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRecyclingByUser">
+      <soap:operation soapAction="http://www.example.org/gabrageRecycler/getRecyclingByUser"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllRecyclingsByUser">
+      <soap:operation soapAction="http://www.example.org/gabrageRecycler/getAllRecyclingsByUser"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="gabrageRecycler">
+    <wsdl:port name="gabrageRecyclerSOAP" binding="tns:gabrageRecyclerSOAP">
+      <soap:address location="http://localhost:8080/GarbageRecycler/services/garbageRecycler"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
